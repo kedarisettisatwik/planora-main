@@ -1,0 +1,113 @@
+.MobileHome{
+    width:100vw;
+    height:100dvh;
+    overflow: hidden;
+    padding:65px 0px 10px 0px;
+    background-color: white;
+    position: relative;
+}
+.MobileHome .DesktopNav.mobile{
+    right: 0;
+    transform: translateX(100%);
+    box-shadow: 0px 0 0px rgb(0,0,0,0);
+    transition: 0.5s;
+    overflow: visible;
+}
+.MobileHome.active .DesktopNav.mobile{
+    box-shadow: -10px 0 10px rgb(0,0,0,0.05);
+    transform: translateX(0%);
+}
+.MobileHome .menuBtn{
+    position: fixed;
+    top: 8px;
+    right: 0px;
+    cursor: pointer;
+    z-index: 980;
+    width: 60px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.5s;
+    background-color: white;
+    opacity: 0.8;
+}
+.MobileHome .HomeMenuIcon{
+    width: 20px;
+    height: 3px;
+    border: 1px solid black;
+    border-radius: 3px;
+    position: relative;
+    background: black;
+}
+.MobileHome .HomeMenuIcon::before{
+    content: '';
+    position: absolute;
+    height: 3px;
+    width: 12px;
+    background: black;
+    right: 0px;
+    bottom: -10px;
+    border-radius: 10px;
+}
+.MobileHome .MenuBar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 55px;
+    overflow: hidden;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.MobileHome .sideClose{
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    opacity: 0.7;
+    cursor: pointer;
+}
+.MobileHome.active .sideClose{
+    display: flex;
+}
+.MobileHome .mobile select{
+    margin: 10px 0 20px 0;
+    padding: 10px 5px;
+    outline: none;
+    border: 2px solid var(--base_color);
+    border-radius: 10px;
+    width: 150px;
+    cursor: pointer;
+}
+.MobileHome .MenuBar select{
+    outline: none;
+    border: none;
+    font-family: "Englebert";
+    font-weight: 800;
+    color:var(--base_color);
+    font-size: 2em;
+    margin: 0 10px 0 15px;
+    cursor: pointer;
+    letter-spacing: 1px;
+    background: none;
+    opacity: 0.8;
+}
+.MobileHome .MenuBar select option{
+    font-family:"Roboto";
+    color: black;
+    font-size: 15px;
+}
+.defaultWidgetDiv{
+    min-width:370px;
+    min-height: 250px;
+}

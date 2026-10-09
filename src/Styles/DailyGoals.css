@@ -1,0 +1,715 @@
+.DailyGoalsMain.desk{
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+.DailyGoalsMain.mobile{
+    width: 100%;
+    height:100%;
+    position: relative;
+}
+.DailyGoalsMain{
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+.DailyGoalsScrollArea::-webkit-scrollbar, .DailyGoalsMain::-webkit-scrollbar{
+    width: 5px;
+}
+.DailyGoalsScrollArea::-webkit-scrollbar-track, .DailyGoalsMain::-webkit-scrollbar-track {
+    background: white; 
+    border-radius: 6px;
+}
+.DailyGoalsScrollArea::-webkit-scrollbar-thumb, .DailyGoalsMain::-webkit-scrollbar-thumb {
+    background: rgb(0,0,0,0.4);
+    border-radius: 6px;
+}
+.DailyGoalsScrollArea {
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 100%;
+  padding-bottom: 20px; 
+  padding-right: 15px;
+}
+
+.DailyGoalsMain .emptyWidgetAdd{
+    height: 100%;
+}
+.DailyGoalsMain .emptyWidgetAdd button{
+    cursor: pointer;
+    padding: 10px;
+    background: var(--base_color);
+    outline: none;
+    border: none;
+    color: wheat;
+    border-radius: 10px;
+    margin: 50px auto;
+}
+.DailyGoalsMain .addNewGoal{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width:100%;
+    height:100%;
+    background-color:white;
+    transform: translateX(100%);
+    opacity: 0;
+    transition: 0.3s;
+    padding: 10px 20px;
+    z-index: 10;
+    display: none;
+}
+.DailyGoalsMain.add .addNewGoal{
+    transform: translateX(0);
+    opacity: 1;
+    display: block;
+}
+.DailyGoalsMain.desk .addNewGoal {
+    max-width: 400px;
+    box-shadow: 10px 0 20px rgb(0, 0, 0, 0.3);
+    padding-right: 0;
+}
+.addNewGoal .fa-chevron-left {
+  font-size: 15px;
+  cursor: pointer;
+  margin-right: 12px;
+  vertical-align: middle;
+  padding: 10px;
+}
+
+.addNewGoal h3 {
+  font-weight: 500;
+  font-size: 20px;
+  margin: 0;
+  font-family: "Englebert";
+  vertical-align: middle;
+  opacity:0.8;
+}
+
+.addNewGoal > span {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 10px;
+  opacity: 0.8;
+}
+
+.addNewGoal > input {
+  font-size: 17px;
+  border: 1px solid #DEDCD2;
+  background: #FFFFFF;
+  border-radius: 10px;
+  padding: 10px 12px;
+  color: #1C2620;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.addNewGoal > input:focus {
+  border-color: var(--base_color);
+  box-shadow: 0 0 0 3px rgba(47, 111, 78, 0.16);
+}
+
+/* ===== Repeats block ===== */
+
+.DailyGoalsMain .addNewGoal .repeats,
+.DailyGoalsMain .viewAllGoals .repeats {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.DailyGoalsMain .addNewGoal .repeatLabel,
+.DailyGoalsMain .viewAllGoals .repeatLabel {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #7A8177;
+  margin:10px 0;
+}
+
+.DailyGoalsMain .addNewGoal .repeatSegment,
+.DailyGoalsMain .viewAllGoals .repeatSegment {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.DailyGoalsMain .addNewGoal .repeatSegBtn,
+.DailyGoalsMain .viewAllGoals .repeatSegBtn {
+  font-size: 12.5px;
+  padding: 10px 15px;
+  border-radius: 999px;
+  border: 1px solid #DEDCD2;
+  background: #fff;
+  color: #4B5058;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.DailyGoalsMain .addNewGoal .repeatSegBtn:hover,
+.DailyGoalsMain .viewAllGoals .repeatSegBtn:hover {
+  border-color: #C7C4B6;
+}
+
+.DailyGoalsMain .addNewGoal .repeatSegBtnActive,
+.DailyGoalsMain .viewAllGoals .repeatSegBtnActive {
+  background: var(--base_color);
+  border-color: var(--base_color);
+  color: #fff;
+}
+
+.DailyGoalsMain .addNewGoal .repeatSubPanel,
+.DailyGoalsMain .viewAllGoals .repeatSubPanel {
+  margin-top: 10px;
+  padding: 12px;
+  background: #F7F6F1;
+  border-radius: 10px;
+}
+
+/* particular days */
+.DailyGoalsMain .addNewGoal .angWeekdays,
+.DailyGoalsMain .viewAllGoals .angWeekdays {
+  display: flex;
+  gap: 6px;
+  justify-content: space-between;
+}
+
+.DailyGoalsMain .addNewGoal .repeatDayDot,
+.DailyGoalsMain .viewAllGoals .repeatDayDot {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid #DEDCD2;
+  background: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  color: #4B5058;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.DailyGoalsMain .addNewGoal .repeatDayDot:hover,
+.DailyGoalsMain .viewAllGoals .repeatDayDot:hover {
+  border-color: #C7C4B6;
+}
+
+.DailyGoalsMain .addNewGoal .repeatDayDotActive,
+.DailyGoalsMain .viewAllGoals .repeatDayDotActive {
+  background: var(--base_color);
+  border-color: var(--base_color);
+  color: #fff;
+}
+
+/* particular dates */
+.DailyGoalsMain .addNewGoal .repeatDatesList,
+.DailyGoalsMain .viewAllGoals .repeatDatesList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.DailyGoalsMain .addNewGoal .angDateRow,
+.DailyGoalsMain .viewAllGoals .angDateRow,
+.DailyGoalsMain .addNewGoal .repeatDateRow,
+.DailyGoalsMain .viewAllGoals .repeatDateRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.DailyGoalsMain .addNewGoal .repeatInput,
+.DailyGoalsMain .viewAllGoals .repeatInput {
+  font-family: 'Inter', sans-serif;
+  border: 1px solid #DEDCD2;
+  background: #FFFFFF;
+  border-radius: 10px;
+  padding: 8px 10px;
+  font-size: 13.5px;
+  color: #1C2620;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.DailyGoalsMain .addNewGoal .repeatInput,
+.DailyGoalsMain .viewAllGoals .repeatInput:focus {
+  border-color: var(--base_color);
+  box-shadow: 0 0 0 3px rgba(47, 111, 78, 0.16);
+}
+
+.DailyGoalsMain .addNewGoal .repeatDateInput,
+.DailyGoalsMain .viewAllGoals .repeatDateInput,
+.DailyGoalsMain .addNewGoal .angDateInput,
+.DailyGoalsMain .viewAllGoals .angDateInput {
+  flex: 1;
+}
+
+.DailyGoalsMain .addNewGoal .repeatRemoveDate,
+.DailyGoalsMain .viewAllGoals .repeatRemoveDate {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 1px solid #DEDCD2;
+  background: #fff;
+  color: #7A8177;
+  font-size: 15px;
+  line-height: 1;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.DailyGoalsMain .addNewGoal .repeatRemoveDate:hover,
+.DailyGoalsMain .viewAllGoals .repeatRemoveDate:hover {
+  border-color: #C7C4B6;
+}
+
+.DailyGoalsMain .addNewGoal .repeatAddDate,
+.DailyGoalsMain .viewAllGoals .repeatAddDate {
+  align-self: flex-start;
+  background: none;
+  border: none;
+  color: var(--base_color);
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 4px 0;
+}
+
+/* date range */
+.DailyGoalsMain .addNewGoal .repeatRangeRow,
+.DailyGoalsMain .viewAllGoals .repeatRangeRow {
+  display: flex;
+  gap: 12px;
+}
+
+.DailyGoalsMain .addNewGoal .repeatRangeField,
+.DailyGoalsMain .viewAllGoals .repeatRangeField {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.DailyGoalsMain .addNewGoal .repeatRangeLabel,
+.DailyGoalsMain .viewAllGoals .repeatRangeLabel {
+  font-size: 11.5px;
+  color: #7A8177;
+}
+
+.DailyGoalsMain .addNewGoal .saveNewGoalBtn{
+    margin: 20px 0px;
+    padding: 10px;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    background-color: var(--base_color);
+    color: white;
+}
+
+.DailyGoalsMain .viewAllGoals{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width:100%;
+    height:100%;
+    background-color:white;
+    transform: translateX(100%);
+    opacity: 0;
+    transition: 0.3s;
+    padding: 10px 20px;
+    z-index: 5;
+    display: none;
+}
+.DailyGoalsMain.desk .viewAllGoals{
+  max-width: 400px;
+  box-shadow: 10px 0 20px rgb(0,0,0,0.3);
+  padding-right: 0;
+}
+
+.DailyGoalsMain.viewall .viewAllGoals{
+    transform: translateX(0);
+    opacity: 1;
+    display: block;
+    overflow: hidden;
+}
+.DailyGoalsMain .viewAllGoals .fa-chevron-left {
+  font-size: 15px;
+  cursor: pointer;
+  margin-right: 12px;
+  vertical-align: middle;
+  padding: 10px;
+}
+.DailyGoalsMain .viewAllGoals h3 {
+  font-weight: 500;
+  font-size: 20px;
+  margin: 0;
+  font-family: "Englebert";
+  vertical-align: middle;
+  opacity:0.8;
+}
+
+/* ===== Goals list ===== */
+
+.DailyGoalsMain .viewAllGoals .listGoals {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-bottom: 20px;
+  overflow-y: auto;
+  height: calc(100% - 90px);
+  padding-right: 10px;
+}
+
+.DailyGoalsMain .viewAllGoals .listGoals::-webkit-scrollbar{
+    width: 5px;
+}
+.DailyGoalsMain .viewAllGoals .listGoals::-webkit-scrollbar-track {
+    background: white; 
+    border-radius: 6px;
+}
+.DailyGoalsMain .viewAllGoals .listGoals::-webkit-scrollbar-thumb {
+    background: rgb(0,0,0,0.4);
+    border-radius: 6px;
+}
+
+.DailyGoalsMain .viewAllGoals .goalCard {
+  border: 1px solid #DEDCD2;
+  border-radius: 10px;
+  background: #fff;
+  padding: 12px;
+}
+
+/* --- collapsed / display state --- */
+
+.DailyGoalsMain .viewAllGoals .goalDisplay {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 10px;
+  position: relative;
+}
+
+.DailyGoalsMain .viewAllGoals .goalDisplay span:first-child {
+  flex: 1 1;
+  font-size: 14px;
+  font-weight: 500;
+  color: #1C2620;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  height: 35px;
+  align-items: center;
+  display: flex;
+}
+.DailyGoalsMain .viewAllGoals .goalTypePreview{
+  font-size: 12px;
+  position: absolute;
+  bottom: -7px;
+  opacity: 0.5;
+  right: 0;
+}
+
+.DailyGoalsMain .viewAllGoals .goalSchedulePreview {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #7A8177;
+  background: #F7F6F1;
+  border-radius: 999px;
+  padding: 4px 10px;
+  flex-shrink: 0;
+}
+
+.DailyGoalsMain .viewAllGoals .goalDisplay .fa-pen,
+.DailyGoalsMain .viewAllGoals .goalDisplay .fa-trash {
+  font-size: 13px;
+  color: #7A8177;
+  cursor: pointer;
+  padding: 6px;
+  flex-shrink: 0;
+  transition: color 0.15s ease;
+}
+
+.DailyGoalsMain .viewAllGoals .goalDisplay .fa-pen:hover {
+  color: var(--base_color);
+}
+
+.DailyGoalsMain .viewAllGoals .goalDisplay .fa-trash:hover {
+  color: #C24545;
+}
+
+/* --- expanded / edit state --- */
+
+.DailyGoalsMain .viewAllGoals .goalEditForm {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.DailyGoalsMain .viewAllGoals .goalEditForm > input {
+  font-size: 15px;
+  border: 1px solid #DEDCD2;
+  background: #FFFFFF;
+  border-radius: 10px;
+  padding: 8px 10px;
+  color: #1C2620;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.DailyGoalsMain .viewAllGoals .goalEditForm > input:focus {
+  border-color: var(--base_color);
+  box-shadow: 0 0 0 3px rgba(47, 111, 78, 0.16);
+}
+
+.DailyGoalsMain .viewAllGoals .goalEditForm > button {
+  align-self: flex-end;
+  margin-top: 12px;
+  padding: 8px 16px;
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  background-color: var(--base_color);
+  color: white;
+}
+
+/* ===== Save all changes ===== */
+
+.DailyGoalsMain .viewAllGoals .saveAllGoalsBtn {
+  position: sticky;
+  bottom: 0;
+  width: 100%;
+  margin-top: 6px;
+  padding: 12px;
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  background-color: var(--base_color);
+  color: white;
+  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.08);
+}
+.DailyGoalsMain .GoalsAsOfDate{
+  margin:15px 0;
+  padding-top: 5px;
+  padding-bottom: 20px;
+  border-top: 1px dashed rgb(0,0,0,0.1);
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+.DailyGoalsMain .GoalsAsOfDate .trackerInput{
+    outline: none;
+    border: 1px solid rgb(0, 0, 0, 0.1);
+    padding: 5px;
+}
+.DailyGoalsMain .GoalsAsOfDate::-webkit-scrollbar{
+    width: 5px;
+}
+.DailyGoalsMain .GoalsAsOfDate::-webkit-scrollbar-track {
+    background: white; 
+    border-radius: 6px;
+}
+.DailyGoalsMain .GoalsAsOfDate::-webkit-scrollbar-thumb {
+    background: rgb(0,0,0,0.4);
+    border-radius: 6px;
+}
+.DailyGoalsMain .goalListItem{
+    position: relative;
+    font-size: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row-reverse;
+    border: 1px solid rgb(0, 0, 0, 0.05);
+    padding: 12px 12px 12px 0;
+    border-radius: 10px;
+    min-width: 300px;
+    margin: 10px;
+    transition:0.4s;
+}
+@media (max-width: 700px) {
+  .DailyGoalsMain .goalListItem {
+    margin: 10px 0;
+    width: 100%;
+  }
+}
+
+.DailyGoalsMain.desk .goalListItem:hover{
+  transform:scale(1.1);
+}
+.DailyGoalsMain .goalListItem span{
+    margin-left: 15px;
+    font-size: 14px;
+}
+.DailyGoalsMain .goalListItem.goalDone{
+  opacity: 0.6;
+}
+.DailyGoalsMain .noteDay{
+  border: "1px solid #e0e0e0"
+}
+.DailyGoalsMain .noteDay:focus{
+  border-color: var(--base_color);
+  box-shadow: 0 0 0 3px rgba(47, 111, 78, 0.16);
+}
+
+/* reports  */
+
+.DailyGoalsMain .reportMain{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width:100%;
+    height:100%;
+    background-color:white;
+    transform: translateX(100%);
+    opacity: 0;
+    transition: 0.3s;
+    padding: 10px 20px;
+    z-index: 10;
+    display: none;
+    overflow:hidden;
+    padding-right: 0px;
+}
+.DailyGoalsMain.desk .reportMain{
+  width: 400px;
+  box-shadow: 10px 0 20px rgb(0,0,0,0.3);
+}
+.DailyGoalsMain.reports .reportMain{
+    transform: translateX(0);
+    opacity: 1;
+    display: block;
+}
+.reportMain .fa-chevron-left {
+  font-size: 15px;
+  cursor: pointer;
+  margin-right: 12px;
+  vertical-align: middle;
+  padding: 10px;
+}
+.reportMain h3 {
+  font-weight: 500;
+  font-size: 20px;
+  margin: 0;
+  font-family: "Englebert";
+  vertical-align: middle;
+  opacity:0.8;
+}
+.iconModeOptions {
+  display: flex;
+  gap: 16px;
+  margin: 6px 0 10px;
+  font-size: 13px;
+}
+
+.iconGrid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.iconGridItem {
+  width: 36px;
+  height: 36px;
+  padding: 4px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: 0.4s;
+  background: white;
+}
+.iconGridItem:hover{
+  transform: scale(3);
+  box-shadow: 0 0 10px rgb(0,0,0,0.1);
+}
+
+.iconGridItemActive {
+  border-color: var(--base_color);
+}
+
+.emojiInput {
+  width: 60px;
+  text-align: center;
+  font-size: 20px;
+}
+
+
+/* Goal completion reward animation */
+.DailyGoalsMain .goalListItem {
+  position: relative;
+}
+
+.goalPointsCelebration {
+  position: absolute;
+  z-index: 30;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(0.75);
+  padding: 9px 14px;
+  border-radius: 14px;
+  color: #245332;
+  background: rgba(255, 255, 255, 0.97);
+  box-shadow: 0 8px 24px rgba(20, 70, 35, 0.2);
+  white-space: nowrap;
+  pointer-events: none;
+  animation: goalRewardPop 2.2s ease both;
+}
+
+.goalConfetti {
+  position: absolute;
+  inset: -22px -26px;
+  pointer-events: none;
+}
+
+.goalConfetti span {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 6px;
+  height: 10px;
+  border-radius: 1px;
+  background: #ff6b6b;
+  animation: goalPaperBurst 850ms ease-out both;
+}
+
+.goalConfetti span:nth-child(1) { background: #ff6b6b; --dx: -42px; --dy: -28px; }
+.goalConfetti span:nth-child(2) { background: #ffd166; --dx: -25px; --dy: -43px; }
+.goalConfetti span:nth-child(3) { background: #06d6a0; --dx: 2px; --dy: -48px; }
+.goalConfetti span:nth-child(4) { background: #4cc9f0; --dx: 32px; --dy: -37px; }
+.goalConfetti span:nth-child(5) { background: #b388eb; --dx: 47px; --dy: -12px; }
+.goalConfetti span:nth-child(6) { background: #f72585; --dx: -46px; --dy: 10px; }
+.goalConfetti span:nth-child(7) { background: #fb8500; --dx: -31px; --dy: 35px; }
+.goalConfetti span:nth-child(8) { background: #80ed99; --dx: 0px; --dy: 43px; }
+.goalConfetti span:nth-child(9) { background: #4895ef; --dx: 31px; --dy: 33px; }
+.goalConfetti span:nth-child(10) { background: #f4a261; --dx: 45px; --dy: 8px; }
+
+@keyframes goalRewardPop {
+  0% { opacity: 0; transform: translate(-50%, -35%) scale(0.65); }
+  15%, 75% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  100% { opacity: 0; transform: translate(-50%, -65%) scale(0.9); }
+}
+
+@keyframes goalPaperBurst {
+  0% { opacity: 0; transform: translate(-50%, -50%) rotate(0deg) scale(0.6); }
+  15% { opacity: 1; }
+  100% { opacity: 0; transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) rotate(300deg) scale(1); }
+}
+

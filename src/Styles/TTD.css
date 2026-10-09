@@ -1,0 +1,602 @@
+.TTDMain{
+    width: 100%;
+    height:100%;
+    position: relative;
+}
+.TTDMain{
+    overflow-x: hidden;
+    overflow-y : auto;
+    padding-left: 15px;
+}
+.TTDMain::-webkit-scrollbar{
+    width: 5px;
+}
+.TTDMain::-webkit-scrollbar-track {
+    background: white; 
+    border-radius: 6px;
+}
+.TTDMain::-webkit-scrollbar-thumb {
+    background: rgb(0,0,0,0.4);
+    border-radius: 6px;
+}
+.TTDMain .descriptionBlock{
+    overflow-x: hidden;
+    overflow-y: auto;
+    max-height: 250px;
+    white-space: break-spaces;
+    margin-bottom: 10px;
+    user-select: text;
+}
+.TTDMain .descriptionBlock::-webkit-scrollbar{
+    width: 5px;
+}
+.TTDMain .descriptionBlock::-webkit-scrollbar-track {
+    background: white; 
+    border-radius: 6px;
+}
+.TTDMain .descriptionBlock::-webkit-scrollbar-thumb {
+    background: rgb(0,0,0,0.4);
+    border-radius: 6px;
+}
+.TTDMain .recordsCount{
+    position: absolute;
+    bottom: 30px;
+    left: 20px;
+    padding: 10px;
+    font-size: 13px;
+    opacity: 0.6;
+}
+
+
+.TTDMain textarea::-webkit-scrollbar{
+    width: 5px;
+}
+.TTDMain textarea::-webkit-scrollbar-track {
+    background: white; 
+    border-radius: 6px;
+}
+.TTDMain textarea::-webkit-scrollbar-thumb {
+    background: rgb(0,0,0,0.4);
+    border-radius: 6px;
+}
+.TTDMain .notesBlock{
+    border-top: 1px dashed rgb(0,0,0,0.1);
+    padding-top: 10px;
+}
+.TTDMain .taskblock.createdforothers .notesBlock,.TTDMain .taskblock.shared .notesBlock{
+    border: none;
+}
+.TTDMain .taskblock.createdforothers .assigneeStatusList,.TTDMain .taskblock.shared .assigneeStatusList{
+    border-top: 1px dashed rgb(0,0,0,0.1);
+    margin:20px 0 10px 0;
+}
+.TTDMain .notesBlock textarea{
+    width: 100%;
+    resize:vertical;
+    max-height: 200px;
+    padding: 10px;
+    font-size: 13px;
+    margin: 10px 0;
+    outline: none;
+    border: 1px solid rgb(0,0,0,0.1);
+    border-radius: 10px;
+    height: 30px;
+}
+
+.TTDMain .addNewTask{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width:100%;
+    height:100%;
+    background-color:white;
+    transform: translateX(100%);
+    opacity: 0;
+    transition: 0.3s;
+    padding: 10px 20px;
+    z-index: 10;
+    display: none;
+}
+.TTDMain.add .addNewTask{
+    transform: translateX(0);
+    opacity: 1;
+    display: block;
+}
+
+.TTDMain.desk .addNewTask{
+    width: 450px;
+    box-shadow: -10px 0px 10px rgb(0,0,0,0.03);
+}
+.addNewTask .fa-chevron-left {
+  font-size: 15px;
+  cursor: pointer;
+  margin-right: 12px;
+  vertical-align: middle;
+  padding: 10px;
+}
+
+.addNewTask h3 {
+  font-weight: 500;
+  font-size: 20px;
+  margin: 0;
+  font-family: "Englebert";
+  vertical-align: middle;
+  opacity:0.8;
+}
+
+.addNewTask span {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 10px;
+  opacity: 0.8;
+}
+
+.addNewTask > input,.addNewTask > textarea {
+  font-size: 17px;
+  border: 1px solid #DEDCD2;
+  background: #FFFFFF;
+  border-radius: 10px;
+  padding: 10px 12px;
+  color: #1C2620;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.addNewTask > textarea {
+    min-height: 100px;
+    max-height: 200px;
+    resize: vertical;
+}
+.addNewTask > input:focus, .addNewTask > textarea:focus {
+  border-color: var(--base_color);
+  box-shadow: 0 0 0 3px rgba(47, 111, 78, 0.16);
+}
+.addNewTask .DateIn{
+    outline: none;
+    background: none;
+    border: 1px solid rgb(0, 0, 0, 0.1);
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+/* ===== Assign To block ===== */
+
+.TTDMain .addNewTask .assignTo {
+  display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 0 12px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.TTDMain .addNewTask .assignSubLabel {
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: #7A8177;
+  margin: 12px 0 4px;
+}
+
+.TTDMain .addNewTask .assignRow {
+  display: flex;
+  gap: 10px;
+  padding: 6px 0;
+}
+.TTDMain .addNewTask .assignRow span{
+    text-transform: none;
+    font-weight: 400;
+}
+.TTDMain .addNewTask .assignRowIndented {
+  padding-left: 30px;
+}
+
+.TTDMain .addNewTask .assignRow input[type="checkbox"]:hover {
+  border-color: #C7C4B6;
+}
+
+.TTDMain .addNewTask .assignRow input[type="checkbox"]:checked {
+  background: var(--base_color);
+  border-color: var(--base_color);
+}
+
+.TTDMain .addNewTask .assignRow input[type="checkbox"]:checked::after {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 1px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.TTDMain .addNewTask .assignRow span {
+  font-size: 13px;
+  color: #1C2620;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-bottom: 0;
+}
+
+.TTDMain .addNewTask .assignOtherInput {
+  flex: 1;
+  font-family: 'Inter', sans-serif;
+  font-size: 13.5px;
+  border: 1px solid #DEDCD2;
+  background: #FFFFFF;
+  border-radius: 10px;
+  padding: 8px 10px;
+  color: #1C2620;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.TTDMain .addNewTask .assignOtherInput:focus {
+  border-color: var(--base_color);
+  box-shadow: 0 0 0 3px rgba(47, 111, 78, 0.16);
+}
+.TTDMain .addNewTask .repeatRemoveDate {
+    width: 30px;
+    border-radius: 10px;
+    border: none;
+}
+
+.TTDMain .addNewTask .saveNewTaskBtn{
+    margin: 20px 0px;
+    padding: 10px;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    background-color: var(--base_color);
+    color: white;
+    position: absolute;
+    top: 0;
+    right: 10px;
+}
+
+.TTDMain .attendeeRow{
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+.TTDMain .attendeeRow select{
+  width: 90px;
+  flex-shrink: 0;
+}
+
+/* connections suggestion dropdown */
+.TTDMain .attendeeInputWrap{
+  position: relative;
+  flex: 1;
+}
+.TTDMain .attendeeInputWrap input{
+    width: 100%;
+    padding: 5px 10px;
+    border: 1px solid rgb(0, 0, 0, 0.2);
+    border-radius: 5px;
+    margin-left: 5px;
+    outline: none;
+}
+.TTDMain .suggestDropdown{
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background: #fff;
+  border: 1px solid #DEDCD2;
+  border-radius: 10px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  z-index: 30;
+  max-height: 170px;
+  overflow-y: auto;
+}
+.TTDMain .suggestItem{
+  padding: 8px 10px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+.TTDMain .suggestItem:hover{
+  background: #F7F6F1;
+}
+.TTDMain .suggestName{
+  font-size: 11px;
+  font-weight: 600;
+  color: #1C2620;
+}
+.TTDMain .suggestEmail{
+  font-size: 10px;
+  color: #7A8177;
+}
+.TTDMain .noConnectionsHint{
+  font-size: 12px;
+  opacity: 0.6;
+  margin-bottom: 8px;
+}
+.TTDMain .addDateBtn{
+    margin: 10px 0;
+    color: white;
+    background: var(--base_color);
+    padding: 10px;
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+/* ===== Save all changes ===== */
+.TTDMain .TasksAsOfDate{
+  margin:15px 0;
+  padding-top: 5px;
+  padding-bottom: 20px;
+  border-top: 1px dashed rgb(0,0,0,0.1);
+  height: calc(100% - 120px);
+  overflow-y: auto;
+}
+.TTDMain .TasksAsOfDate::-webkit-scrollbar{
+    width: 5px;
+}
+.TTDMain .TasksAsOfDate::-webkit-scrollbar-track {
+    background: white; 
+    border-radius: 6px;
+}
+.TTDMain .TasksAsOfDate::-webkit-scrollbar-thumb {
+    background: rgb(0,0,0,0.4);
+    border-radius: 6px;
+}
+
+.TTDMain .TasksList{
+    position: relative;
+    width: 100%;
+    height:calc(100% - 80px);
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+.TTDMain.desk .TasksList{
+    padding: 10px;
+}
+.TTDMain .TasksList::-webkit-scrollbar{
+    width: 5px;
+}
+.TTDMain .TasksList::-webkit-scrollbar-track {
+    background: white; 
+    border-radius: 6px;
+}
+.TTDMain .TasksList::-webkit-scrollbar-thumb {
+    background: rgb(0,0,0,0.4);
+    border-radius: 6px;
+}
+
+.TTDMain ul{
+    list-style: none;
+}
+.TTDMain.desk ul{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.TTDMain .taskblock{
+    list-style: none;
+    margin: 15px 0;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid rgb(0, 0, 0, 0.1);
+    position: relative;
+}
+.TTDMain.desk .taskblock {
+    width: 350px;
+    box-shadow: 0 0 10px rgb(0, 0, 0, 0.02);
+}
+.TTDMain .taskblock h3{
+    font-size: 19px;
+    font-weight: bold;
+    opacity: 0.6;
+    margin-bottom: 10px;
+    user-select: text;
+}
+.TTDMain .taskblock.completed h3,.TTDMain .taskblock.completedAll h3{
+    max-width: calc(100% - 140px);
+}
+.TTDMain .taskblock .btns{
+    display: flex;    
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-top: 10px;
+}
+.TTDMain .taskblock .Done,.TTDMain .taskblock .Back{
+    outline: none;
+    background: white;
+    border: 1px solid var(--base_color);
+    border-radius: 10px;
+    padding: 6px;
+    cursor: pointer;
+    font-size: 12px;
+    color: white;
+    background-color: var(--base_color);
+    transition: 0.3s;
+    display: none;
+    margin-left: 10px;
+}
+.TTDMain .taskblock .Back{
+    color: black;
+    background-color:white;
+}
+.TTDMain .taskblock .Back:hover{
+    color: white;
+    background-color: var(--base_color);
+}
+.TTDMain .taskblock .Done:hover{
+    background-color: white;
+    color: black;
+}
+.TTDMain .taskblock.completed .Back,.TTDMain .taskblock.completedAll .Back{
+    display: block;
+}
+.TTDMain .taskblock.notcompleted .Done{
+    display: block;
+}
+.TTDMain .taskblock.createdforothers .Back,.TTDMain .taskblock.createdforothers .Done{
+    display: none;
+}
+.TTDMain .taskblock .shared, .TTDMain .taskblock .request,.TTDMain .taskblock .assign{
+    font-size: 10px;
+    background: #dfdfdf;
+    padding: 5px 10px;
+    border-radius: 10px;
+    letter-spacing: 1px;
+    display: none;
+}
+.TTDMain .taskblock.createdforothers  .request{
+    display: block;
+}
+.TTDMain .taskblock.shared  .shared{
+    display: block;
+}
+.TTDMain .taskblock.assignedbyother  .assign{
+    display: block;
+}
+.TTDMain .taskblock .TaskDone{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border-radius: 10px;
+    background: #66eb66;
+    opacity: 0.6;
+    font-size: 12px;
+    padding: 6px;
+    display: none;
+}
+.TTDMain .taskblock.completed .TaskDone,.TTDMain .taskblock.completedAll .TaskDone {
+    display: block;
+}
+.TTDMain .assigneeStatusRow{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 10px 0;
+    gap: 10px;
+    font-size: 14px;
+    opacity: 0.8;
+    border: 1px solid rgb(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 10px 5px;
+}
+.TTDMain .taskblock .TaskDates {
+    margin:0 0 10px 0;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 10px;
+}
+.TTDMain .taskblock .TaskDates p{
+    font-size: 10px;
+    background: white;
+    border-radius: 10px;
+    border: 1px solid rgb(0, 0, 0, 0.2);
+    padding: 5px;
+}
+.TTDMain .taskblock .TaskDates p span{
+    font-size: 12px;
+}
+.TTDMain .taskblock.futureTask .TaskDates .TaskStartDate{
+    background-color: #b1fdb1;
+}
+.TTDMain .taskblock.overdue .TaskDates .TaskEndDate{
+    background-color: rgb(255 89 89);
+    color: white;
+}
+.TTDMain .taskblock.futureTask.completed .TaskDates .TaskStartDate,
+.TTDMain .taskblock.futureTask.completedAll .TaskDates .TaskEndDate,
+.TTDMain .taskblock.overdue.completed .TaskDates .TaskEndDate,
+.TTDMain .taskblock.overdue.completedAll .TaskDates .TaskEndDate{
+    background-color: white;
+    color: black;
+}
+.TTDMain .taskblock .remainingDaysLabel, .TTDMain .taskblock .overDueLabel{
+    opacity: 0.8;
+    font-size: 15px;
+    color: red;
+}
+.TTDMain .taskblock .overDueLabel{
+    display: none;
+}
+.TTDMain .taskblock.overdue .overDueLabel{
+    display: block;
+}
+.TTDMain .taskblock.completed .remainingDaysLabel,
+.TTDMain .taskblock.completedAll .remainingDaysLabel{
+    display: none;
+}
+
+.TTDMain .taskFilterBar {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 6px;
+  margin: 10px 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; /* Firefox */
+}
+
+.TTDMain .taskFilterBar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Edge */
+}
+
+.TTDMain .filterPill {
+  flex-shrink: 0;
+}
+.TTDMain .filterPill {
+  font-size: 12.5px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid #DEDCD2;
+  background: #fff;
+  color: #4B5058;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.TTDMain .filterPill:hover {
+  border-color: #C7C4B6;
+}
+
+.TTDMain .filterPillActive {
+  background: var(--base_color);
+  border-color: var(--base_color);
+  color: #fff;
+}
+
+.TTDMain .assigneeInfo{
+    width: calc(100% - 20px);
+}
+.TTDMain .assigneeInfo textarea{
+    font-size: 13px;
+    margin-top: 4px;
+    opacity: 0.8;
+    padding: 10px;
+    border: 1px solid rgb(0, 0, 0, 0.1);
+    border-radius: 10px;
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    white-space: break-spaces;
+    max-height: 200px;
+}
+.TTDMain textarea:focus{
+  border-color: var(--base_color);
+  box-shadow: 0 0 0 3px rgba(47, 111, 78, 0.16);
+}
