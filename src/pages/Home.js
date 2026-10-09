@@ -3,7 +3,6 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { isMobile } from "react-device-detect";
 import toast from 'react-hot-toast';
 
-import DesktopHome from "./DesktopHome";
 import MobileHome from "./MobileHome";
 
 import '../Styles/Home.css';
