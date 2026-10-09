@@ -1,6 +1,5 @@
 import { useState, useEffect, useMemo } from "react";
 import toast from 'react-hot-toast';
-import { isMobile } from "react-device-detect";
 import { v4 as uuidv4 } from 'uuid';
 
 import '../Styles/Home.css'
@@ -8,13 +7,6 @@ import '../Styles/TTD.css'
 
 import { doc, setDoc, deleteDoc, updateDoc, collection, getDocs, FieldPath } from "firebase/firestore";
 import { db } from "../firebase";
-
-// left -> right order on desktop
-const COLUMNS = [
-    { id: "inprogress", title: "In Progress" },
-    { id: "pending", title: "Pending" },
-    { id: "completed", title: "Completed" },
-];
 
 const STATUS_RANK = { inprogress: 0, pending: 1, completed: 2 };
 
@@ -99,10 +91,6 @@ function TTDWidget({ email, setLoading }) {
 
     const [searchInput, setSearchInput] = useState("");   // live input value
     const [searchQuery, setSearchQuery] = useState("");   // committed value used for filtering (set onBlur / Enter)
-
-    // drag & drop (desktop only)
-    const [draggingId, setDraggingId] = useState(null);
-    const [dragOverCol, setDragOverCol] = useState(null);
 
     const FILTER_OPTIONS = [
         { id: "viewAll", label: "View All" },
@@ -542,42 +530,6 @@ function TTDWidget({ email, setLoading }) {
         }
     };
 
-    /* ---------------- drag & drop handlers (desktop) ---------------- */
-
-    const handleDragStart = (e, task) => {
-        e.dataTransfer.effectAllowed = "move";
-        e.dataTransfer.setData("text/plain", task.id);
-        setDraggingId(task.id);
-    };
-
-    const handleDragEnd = () => {
-        setDraggingId(null);
-        setDragOverCol(null);
-    };
-
-    const handleColumnDragOver = (e, colId) => {
-        e.preventDefault(); // required, otherwise drop never fires
-        e.dataTransfer.dropEffect = "move";
-        if (dragOverCol !== colId) setDragOverCol(colId);
-    };
-
-    const handleColumnDragLeave = (e, colId) => {
-        // ignore leave events fired when moving over a child element
-        if (e.currentTarget.contains(e.relatedTarget)) return;
-        setDragOverCol((cur) => (cur === colId ? null : cur));
-    };
-
-    const handleColumnDrop = (e, colId) => {
-        e.preventDefault();
-        const id = e.dataTransfer.getData("text/plain") || draggingId;
-        const task = tasks.find((t) => t.id === id);
-
-        setDraggingId(null);
-        setDragOverCol(null);
-
-        if (task) updateTaskStatus(task, colId);
-    };
-
     /* ---------------- render ---------------- */
 
     // theme picker, used by both the create panel and the edit modal
@@ -610,73 +562,6 @@ function TTDWidget({ email, setLoading }) {
             />
         </div>
     );
-
-    // Desktop: a 200 x 200 card showing only the title and description.
-    // Click opens the edit modal, drag moves it between columns.
-    const renderBoardCard = (task) => {
-        const bg = task.color || DEFAULT_TASK_COLOR;
-        const overdue = !task.isDone && getDateStatusClass(task).classes.includes("overdue");
-
-        return (
-            <li
-                key={task.id}
-                className="boardCard"
-                draggable
-                onDragStart={(e) => handleDragStart(e, task)}
-                onDragEnd={handleDragEnd}
-                onClick={() => openEditTask(task)}
-                style={{
-                    width: "200px",
-                    boxSizing: "border-box",
-                    padding: "14px",
-                    margin: 0,
-                    borderRadius: "14px",
-                    border: overdue ? "2px solid #d9534f" : "1px solid rgba(0,0,0,0.08)",
-                    overflow: "hidden",
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: "8px",
-                    listStyle: "none",
-                    cursor: "grab",
-                    opacity: draggingId === task.id ? 0.4 : 1,
-                    background: bg,
-                    color: getTextColor(bg)
-                }}
-            >
-                <h3
-                    style={{
-                        margin: 0,
-                        fontSize: "15px",
-                        lineHeight: 1.3,
-                        wordBreak: "break-word",
-                        overflow: "hidden",
-                        display: "-webkit-box",
-                        WebkitLineClamp: 2,
-                        WebkitBoxOrient: "vertical"
-                    }}
-                >
-                    {task.title}
-                </h3>
-
-                {task.description?.trim().length > 0 && (
-                    <p
-                        style={{
-                            margin: 0,
-                            fontSize: "12.5px",
-                            lineHeight: 1.45,
-                            opacity: 0.75,
-                            wordBreak: "break-word",
-                            whiteSpace: "pre-wrap",
-                            maxHeight: "150px",
-                            overflow: "hidden"
-                        }}
-                    >
-                        {task.description}
-                    </p>
-                )}
-            </li>
-        );
-    };
 
     // Mobile: the full card (unchanged layout) with the status select
     const renderTaskCard = (task) => {
@@ -797,69 +682,6 @@ function TTDWidget({ email, setLoading }) {
 
     // Desktop: three equal-width columns that act as drop zones.
     // Cards wrap inside each column, so they sit side by side.
-    const renderKanbanBoard = () => (
-        <div
-            className="kanbanBoard"
-            style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
-                gap: "14px",
-                alignItems: "stretch",
-                paddingRight: "15px"
-            }}
-        >
-            {COLUMNS.map((col) => {
-                const colTasks = allTasks.filter((t) => t.status === col.id);
-                const isOver = dragOverCol === col.id;
-
-                return (
-                    <div
-                        key={col.id}
-                        className={`kanbanColumn ${col.id} ${isOver ? "dragOver" : ""}`}
-                        onDragOver={(e) => handleColumnDragOver(e, col.id)}
-                        onDragLeave={(e) => handleColumnDragLeave(e, col.id)}
-                        onDrop={(e) => handleColumnDrop(e, col.id)}
-                        style={{
-                            minHeight: "60vh",
-                            padding: "10px",
-                            borderRadius: "12px",
-                            outline: "1px dashed rgba(0,0,0,0.35)",
-                            transition: "background 0.15s, outline-color 0.15s"
-                        }}
-                    >
-                        <div
-                            className="kanbanColumnHeader"
-                            style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "12px" }}
-                        >
-                            <h3 style={{ margin: 0 }}>{col.title}</h3>
-                            <span style={{ fontSize: "13px", opacity: 0.6 }}>{colTasks.length}</span>
-                        </div>
-
-                        <ul
-                            style={{
-                                display: "flex",
-                                flexWrap: "wrap",
-                                alignItems: "flex-start",
-                                gap: "12px",
-                                padding: 0,
-                                margin: 0,
-                                listStyle: "none"
-                            }}
-                        >
-                            {colTasks.map((task) => renderBoardCard(task))}
-                        </ul>
-
-                        {colTasks.length === 0 && (
-                            <p style={{ fontSize: "13px", opacity: 0.5, textAlign: "center", marginTop: "30px" }}>
-                                Drop tasks here
-                            </p>
-                        )}
-                    </div>
-                );
-            })}
-        </div>
-    );
-
     // Modal for viewing / editing a task
     const renderEditModal = () => (
         <div
@@ -954,7 +776,7 @@ function TTDWidget({ email, setLoading }) {
 
     return (
         <div
-            className={`defaultWidgetDiv TTDMain ${isMobile ? 'mobile' : 'desk'} ${addTaskPage ? 'add' : ''}`}
+            className={`defaultWidgetDiv TTDMain mobile ${addTaskPage ? 'add' : ''}`}
             style={{ padding: "0px 0px 40px 15px" }}
             onContextMenu={handleRightClick}
             onClick={() => setContextMenu((prev) => ({ ...prev, visible: false }))}
@@ -992,7 +814,7 @@ function TTDWidget({ email, setLoading }) {
             </div>
 
             <div className="TasksList">
-                {isMobile ? renderMobileList() : renderKanbanBoard()}
+                {renderMobileList()}
             </div>
 
             <div className="recordsCount">

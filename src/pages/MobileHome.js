@@ -1,4 +1,4 @@
-﻿import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import toast from 'react-hot-toast';
 
 import '../Styles/MobileHome.css';
@@ -8,19 +8,22 @@ import { doc, getDoc, setDoc } from "firebase/firestore";
 import { db } from "../firebase";
 
 import DailyGoalsWidget from "../components/DailyGoalsWidget";
+import EventsWidget from "../components/EventsWidget";
+import MoneyWidget from "../components/MoneyWidget";
 import TTDWidget from "../components/TTDWidget";
-import NotesWidget from "../components/NotesWidget";
 
 const WIDGET_COMPONENTS = {
     DailyGoals: DailyGoalsWidget,
+    Events: EventsWidget,
+    Money: MoneyWidget,
     TTD: TTDWidget,
-    Notes: NotesWidget
 };
 
 const WIDGET_DISPLAY_NAMES = {
     DailyGoals: "Daily Goals",
-    TTD: "Things to do",
-    Notes: "Notes"
+    Events: "Events",
+    Money: "Money",
+    TTD: "Things to do"
 };
 
 const DEFAULT_HOME_WIDGET = "DailyGoals";
@@ -187,5 +190,6 @@ function MobileHome({ setLoading, email, setPopup, setPopupContent, signOut, goa
 }
 
 export default MobileHome;
+
 
 
